@@ -1,2 +1,3 @@
-# vis-gui
-a repo to build a visualization GUI
+# zhengtong's SoftRenderer
+
+A repo to start build a softRenderer
