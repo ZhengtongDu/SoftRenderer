@@ -15,6 +15,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SOURCE_FILES
     "src/main.cpp"
     "src/Application.cpp"
+    "src/Renderer.cpp"
+    "src/Vector.cpp"
     # "src/Window.cpp"
     # 如果有其他源文件，也应该添加到这里
 )

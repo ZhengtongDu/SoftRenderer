@@ -101,10 +101,17 @@ void Application::Init()
         for (int j = 0; j < m_height; j++)
         {
             m_frameBuffer[i][j] = new int[3];
-            m_frameBuffer[i][j][0] = 255;
-            m_frameBuffer[i][j][1] = 255;
-            m_frameBuffer[i][j][2] = 255;
+            m_frameBuffer[i][j][0] = 255; // Red Value
+            m_frameBuffer[i][j][1] = 255; // Green Value
+            m_frameBuffer[i][j][2] = 255; // Blue Value
         }
+    }
+    m_depthBuffer = new double *[m_width];
+    for (int i = 0; i < m_width; i++)
+    {
+        m_depthBuffer[i] = new double[m_height];
+        for (int j = 0; j < m_height; j++)
+            m_depthBuffer[i][j] = 0;
     }
 }
 

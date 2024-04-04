@@ -1,16 +1,9 @@
 #ifndef RENDERER_H
 #define RENDERER_H 
 
-#include "Camera.h"
-#include "imgui.h"
-#include "backends/imgui_impl_opengl3.h"
-#include "backends/imgui_impl_glfw.h"
+#include <vector>
 #include <iostream>
-#include "stb_image.h"
-#include "shader_s.h"
-#include "ResourceManager.h"
-#include <utility>
-#include <map>
+#include "Vector.h"
 
 /**
  * @class Renderer
@@ -19,35 +12,17 @@
  */
 class Renderer {
 public:
-    Renderer(GLFWwindow* _window, const unsigned int& _screenWidth, const unsigned int& _screenHeight);
-    void RenderFrame();
-    // 其他成员函数...
+    Renderer(){};
+    Renderer(int*** _frameBuffer, double** m_depthBuffer);
 
-    // 回调函数声明
-    void framebuffer_size_callback(GLFWwindow *window, int width, int height);
-    void mouse_callback(GLFWwindow *window, double xposIn, double yposIn);
-    void processInput(GLFWwindow *window);
-    void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
+    // TBD
+    bool DrawPoint(int _x, int _y);
+    bool DrawLine(int _x, int _y);
+    bool DrawTriangle();
 
-private:
-    GLFWwindow* window;
-    Camera camera; // 摄像机对象
-    //Light light;   // 光源对象
-    // 可能还有其他渲染状态和配置
-
-    // 配置变量
-    unsigned int screenWidth;
-    unsigned int screenHeight;
-    float lastX;
-    float lastY;
-    bool firstMouse;
-
-    // 计时
-    float deltaTime; // 当前帧与上一帧的时间差
-    float lastFrame; // 上一帧的时间
-    float responseTime; // 响应时间，用于处理按键事件的防抖
-
+    int m_width, m_height;
+    int*** m_frameBuffer;
+    double** m_depthBuffer;
 };
-
 
 #endif // !RENDERER_H

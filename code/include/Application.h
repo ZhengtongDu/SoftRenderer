@@ -8,7 +8,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "Window.h"
+#include "Renderer.h"
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -50,6 +50,7 @@ private:
     // EventHandler eventHandler;
     // 其他应用程序状态和逻辑
 
+    // Basic Settings
     void Init();
     struct window
     {
@@ -64,9 +65,15 @@ private:
     } m_window;
     void SendFrame2Image();
     void UpdateFrameBuffer();
+
+    // Setting Configs about WINDOWS
     std::string m_windowName;
     int ***m_frameBuffer;
+    double **m_depthBuffer;
     int m_width, m_height;
+
+    // Renderer Module
+    Renderer m_renderer;
 };
 
 #endif // !APPLICATION_H
