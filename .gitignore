@@ -1,6 +1,7 @@
 # ignore the /build directory
 /code/build/
 /code/.vscode/
+/.vscode/
 /doc/Doxygen/
 /code/assets/
 /code/shaders/
