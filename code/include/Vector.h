@@ -30,6 +30,8 @@ public:
     double operator *(const Vector2d& rhs) const;
     Vector2d operator *(const double& rhs) const;
     Vector2d operator /(const double& rhs) const;
+    double operator[] (const int idx) const;
+    double& operator[] (const int idx);
     friend Vector2d operator *(const double& lhs, const Vector2d& rhs);
     friend std::ostream &operator<< (std::ostream &output, const Vector2d& rhs);
     double dist() const;
@@ -91,6 +93,7 @@ public:
     Vector4d operator *(const double& rhs) const;
     Vector4d operator /(const double& rhs) const;
     double operator[] (const int idx) const;
+    double& operator[] (const int idx);
     friend Vector4d operator *(const double& lhs, const Vector4d& rhs);
     friend std::ostream &operator<< (std::ostream &output, const Vector4d& rhs);
     double dist() const;

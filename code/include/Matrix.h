@@ -14,7 +14,7 @@ public:
     Matrix3d(const Matrix3d& rhs);
     Matrix3d& operator=(const Matrix3d& rhs);
     ~Matrix3d(){};
-    Matrix3d GetIdentity() const;
+    Matrix3d getIdentity() const;
     Matrix3d operator-() const;
     Matrix3d operator+(const Matrix3d& rhs) const;
     Matrix3d operator-(const Matrix3d& rhs) const;
@@ -36,10 +36,27 @@ public:
     Matrix4d()
     {
         for (int i = 0; i < 4; i++)
-            data[i] = new Vector4d();
+            data[i] = Vector4d();
     };
-    ~Matrix4d();
-    Vector4d *data[4];
+    Matrix4d(const Matrix4d& rhs);
+    Matrix4d& operator=(const Matrix4d& rhs);
+    ~Matrix4d(){};
+    Matrix4d getIdentity() const;
+    Matrix4d operator-() const;
+    Matrix4d operator+(const Matrix4d& rhs) const;
+    Matrix4d operator-(const Matrix4d& rhs) const;
+    Matrix4d operator*(const double& rhs) const;
+    Vector4d operator*(const Vector4d& rhs) const;
+    Matrix4d operator*(const Matrix4d& rhs) const;
+    Vector4d operator[](const int idx) const;
+    Vector4d& operator[](const int idx);
+    bool operator==(const Matrix4d& rhs) const;
+    bool operator!=(const Matrix4d& rhs) const;
+    double subDeterminant(const int excludeRow, const int excludeCol) const;
+    Matrix4d inverse() const;
+    double determinant() const;
+
+    Vector4d data[4];
 };
 
 #endif // !MATRIX_H

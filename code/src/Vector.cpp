@@ -4,7 +4,7 @@
 
 Vector2d Vector2d::operator-() const
 {
-    Vector2d(-x, -y);
+    return Vector2d(-x, -y);
 };
 
 Vector2d Vector2d::operator+(const Vector2d &rhs) const
@@ -42,6 +42,24 @@ Vector2d Vector2d::operator/(const double &rhs) const
     if (std::fabs(rhs) < epsilon)
         return Vector2d();
     return Vector2d(x / rhs, y / rhs);
+};
+
+double Vector2d::operator[](const int idx) const
+{
+    if(idx == 0)
+        return x;
+    if(idx == 1)
+        return y;
+    throw std::runtime_error("Vector2d index invalid!");
+};
+
+double& Vector2d::operator[](const int idx)
+{
+    if(idx == 0)
+        return x;
+    if(idx == 1)
+        return y;
+    throw std::runtime_error("Vector2d index invalid!");
 };
 
 Vector2d operator*(const double &lhs, const Vector2d &rhs)
@@ -126,8 +144,7 @@ double Vector3d::operator[](const int idx) const
         return y;
     if(idx == 2)
         return z;
-    std::cout << "vector3d index invalid!" << std::endl;
-    return x;    
+    throw std::runtime_error("Vector3d index invalid!");
 };
 
 double& Vector3d::operator[](const int idx)
@@ -138,8 +155,7 @@ double& Vector3d::operator[](const int idx)
         return y;
     if(idx == 2)
         return z;
-    std::cout << "vector3d index invalid!" << std::endl;
-    return x;    
+    throw std::runtime_error("Vector3d index invalid!");
 };
 
 Vector3d operator*(const double &lhs, const Vector3d &rhs)
@@ -233,8 +249,20 @@ double Vector4d::operator[](const int idx) const
         return z;
     if(idx == 3)
         return w;
-    std::cout << "vector4d index invalid!" << std::endl;
-    return x;    
+    throw std::runtime_error("Vector4d index invalid!");
+};
+
+double& Vector4d::operator[](const int idx)
+{
+    if(idx == 0)
+        return x;
+    if(idx == 1)
+        return y;
+    if(idx == 2)
+        return z;
+    if(idx == 3)
+        return w;
+    throw std::runtime_error("Vector4d index invalid!");
 };
 
 Vector4d operator*(const double &lhs, const Vector4d &rhs){
