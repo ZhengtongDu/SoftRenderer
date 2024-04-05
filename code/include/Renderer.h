@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "Vector.h"
+#include <algorithm>
 
 /**
  * @class Renderer
@@ -13,12 +14,13 @@
 class Renderer {
 public:
     Renderer(){};
-    Renderer(int*** _frameBuffer, double** m_depthBuffer);
+    Renderer(int*** _frameBuffer, double** m_depthBuffer, int _width, int _height);
 
-    // TBD
-    bool DrawPoint(int _x, int _y);
-    bool DrawLine(int _x, int _y);
-    bool DrawTriangle();
+
+    bool setPixelColor(const int x, const int y, const Vector3i& color = Vector3i(255, 255, 255), bool warningOn = true);
+    bool drawPoint(const Vector2d& p, const Vector3i& color = Vector3i(255, 255, 255));
+    bool drawLine(const Vector2d& start, const Vector2d& end, const Vector3i& color = Vector3i(255, 255, 255));
+    bool drawTriangle(const Vector2d& p1, const Vector2d& p2, const Vector2d& p3, const Vector3i& color = Vector3i(255, 255, 255), const bool isFilled = true);
 
     int m_width, m_height;
     int*** m_frameBuffer;

@@ -30,16 +30,27 @@ class Application
 {
 public:
     Application(const char *windowName = "Soft Renderer", const int _width = 800, const int _height = 600);
-    ~Application(){};
-    void Run();
+    ~Application()
+    {
+        for (int i = 0; i < m_width; i++)
+        {
+            for (int j = 0; j < m_height; j++)
+                free(m_frameBuffer[i][j]);
+            free(m_frameBuffer[i]);
+            free(m_depthBuffer[i]);
+        }
+        free(m_frameBuffer);
+        free(m_depthBuffer);
+    };
+    void run();
 
-    bool ChangeWindowWidth(const int _width)
+    bool changeWindowWidth(const int _width)
     {
         m_width = _width;
         return true;
     }
 
-    bool ChangeWindowHeight(const int _height)
+    bool changeWindowHeight(const int _height)
     {
         m_height = _height;
         return true;
@@ -51,7 +62,7 @@ private:
     // 其他应用程序状态和逻辑
 
     // Basic Settings
-    void Init();
+    void init();
     struct window
     {
         Window w;           // window
@@ -63,8 +74,7 @@ private:
         window(){};
         window(const char *_windowName, int _width, int _height);
     } m_window;
-    void SendFrame2Image();
-    void UpdateFrameBuffer();
+    void sendFrame2Image();
 
     // Setting Configs about WINDOWS
     std::string m_windowName;

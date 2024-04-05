@@ -9,6 +9,7 @@ const double epsilon = 1e-9;
 
 class Vector2d;
 class Vector3d;
+class Vector3i;
 class Vector4d;
 
 class Vector2d
@@ -34,9 +35,10 @@ public:
     double& operator[] (const int idx);
     friend Vector2d operator *(const double& lhs, const Vector2d& rhs);
     friend std::ostream &operator<< (std::ostream &output, const Vector2d& rhs);
-    double dist() const;
+    double norm() const;
     Vector2d normalize() const;
     Vector2d normalized();
+    double cross(const Vector2d& rhs) const;
     // member object
     double x, y;
 };
@@ -63,7 +65,7 @@ public:
     double& operator[] (const int idx);
     friend Vector3d operator *(const double& lhs, const Vector3d& rhs);
     friend std::ostream &operator<< (std::ostream &output, const Vector3d& rhs);
-    double dist() const;
+    double norm() const;
     Vector3d normalize() const;
     Vector3d normalized();
     Vector3d cross(const Vector3d& rhs) const;
@@ -71,6 +73,31 @@ public:
 
     // member object
     double x, y, z;
+};
+
+class Vector3i
+{
+public:
+    Vector3i(){x = 0,y = 0, z = 0;};
+    Vector3i(int _x, int _y, int _z):x(_x), y(_y), z(_z){};
+    Vector3i(const Vector3i& rhs){x = rhs.x, y = rhs.y, z = rhs.z;}
+    Vector3i& operator=(const Vector3i& rhs){
+        x = rhs.x, y = rhs.y, z = rhs.z;
+        return *this;
+    }
+    Vector3i operator-() const;
+    Vector3i operator +(const Vector3i& rhs) const;
+    Vector3i operator -(const Vector3i& rhs) const;
+    bool operator ==(const Vector3i& rhs) const;
+    bool operator !=(const Vector3i& rhs) const;
+    double operator *(const Vector3i& rhs) const;
+    Vector3i operator *(const int& rhs) const;
+    int operator[] (const int idx) const;
+    int& operator[] (const int idx);
+    friend std::ostream &operator<< (std::ostream &output, const Vector3i& rhs);
+
+    // member object
+    int x, y, z;
 };
 
 class Vector4d
@@ -96,7 +123,7 @@ public:
     double& operator[] (const int idx);
     friend Vector4d operator *(const double& lhs, const Vector4d& rhs);
     friend std::ostream &operator<< (std::ostream &output, const Vector4d& rhs);
-    double dist() const;
+    double norm() const;
     Vector4d normalize() const;
     Vector4d normalized();
     Vector3d convertToVector3d() const;

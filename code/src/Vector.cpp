@@ -73,23 +73,28 @@ std::ostream &operator<< (std::ostream &output, const Vector2d& rhs)
     return output;
 }
 
-double Vector2d::dist() const
+double Vector2d::norm() const
 {
     return sqrt(x * x + y * y);
 };
 
 Vector2d Vector2d::normalize() const
 {
-    double dis = this->dist();
+    double dis = this->norm();
     return *this / dis;
 };
 
 Vector2d Vector2d::normalized()
 {
-    double dis = this->dist();
+    double dis = this->norm();
     if (std::fabs(dis) >= epsilon)
         x = x / dis, y = y / dis;
     return *this;
+};
+
+double Vector2d::cross(const Vector2d& rhs) const
+{
+    return x * rhs.y - y * rhs.x;
 };
 
 // Vector3d
@@ -169,19 +174,19 @@ std::ostream &operator<< (std::ostream &output, const Vector3d& rhs)
     return output;
 }
 
-double Vector3d::dist() const
+double Vector3d::norm() const
 {
     return sqrt(x * x + y * y + z * z);
 };
 
 Vector3d Vector3d::normalize() const
 {
-    return *this / this->dist();
+    return *this / this->norm();
 };
 
 Vector3d Vector3d::normalized()
 {
-    double dis = this->dist();
+    double dis = this->norm();
     if (std::fabs(dis) >= epsilon)
         x = x / dis, y = y / dis, z = z / dis;
     return *this;
@@ -196,6 +201,78 @@ Vector4d Vector3d::convertToVector4d() const
 {
     return Vector4d(x, y, z);
 };
+
+// Vector3i
+
+Vector3i Vector3i::operator-() const
+{
+    return Vector3i(-x, -y, -z);
+};
+
+Vector3i Vector3i::operator+(const Vector3i &rhs) const
+{
+    return Vector3i(x + rhs.x, y + rhs.y, z + rhs.z);
+};
+
+Vector3i Vector3i::operator-(const Vector3i &rhs) const
+{
+    return Vector3i(x - rhs.x, y - rhs.y, z - rhs.z);
+};
+
+bool Vector3i::operator==(const Vector3i &rhs) const
+{
+    return std::fabs(x - rhs.x) < epsilon && std::fabs(y - rhs.y) < epsilon && std::fabs(z - rhs.z) < epsilon;
+};
+
+bool Vector3i::operator!=(const Vector3i &rhs) const
+{
+    return !(*this == rhs);
+};
+
+double Vector3i::operator*(const Vector3i &rhs) const
+{
+    return x * rhs.x + y * rhs.y + z * rhs.z;
+};
+
+Vector3i Vector3i::operator*(const int &rhs) const
+{
+    return Vector3i(rhs * x, rhs * y, rhs * z);
+};
+
+int Vector3i::operator[](const int idx) const
+{
+    if(idx == 0)
+        return x;
+    if(idx == 1)
+        return y;
+    if(idx == 2)
+        return z;
+    throw std::runtime_error("Vector3i index invalid!");
+};
+
+int& Vector3i::operator[](const int idx)
+{
+    if(idx == 0)
+        return x;
+    if(idx == 1)
+        return y;
+    if(idx == 2)
+        return z;
+    throw std::runtime_error("Vector3i index invalid!");
+};
+
+Vector3i operator*(const double &lhs, const Vector3i &rhs)
+{
+    return lhs * rhs;
+};
+
+std::ostream &operator<< (std::ostream &output, const Vector3i& rhs)
+{
+    output << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
+    return output;
+}
+
+// Vector4d
 
 Vector4d Vector4d::operator-() const
 {
@@ -275,18 +352,18 @@ std::ostream &operator<< (std::ostream &output, const Vector4d& rhs)
     return output;
 }
 
-double Vector4d::dist() const
+double Vector4d::norm() const
 {
     return sqrt(x * x + y * y + z * z + w * w);
 };
 
 Vector4d Vector4d::normalize() const
 {
-    return *this / this->dist();
+    return *this / this->norm();
 };
 
 Vector4d Vector4d::normalized(){
-    double dis = this->dist();
+    double dis = this->norm();
     if (std::fabs(dis) >= epsilon)
         x = x / dis, y = y / dis, z = z / dis, w = w / dis;
     return *this;

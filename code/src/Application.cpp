@@ -38,10 +38,10 @@ Application::window::window(const char *windowName, int width, int height)
 
 Application::Application(const char *windowName, const int _width, const int _height) : m_windowName(windowName), m_width(_width), m_height(_height)
 {
-    Init();
+    init();
 }
 
-void Application::SendFrame2Image()
+void Application::sendFrame2Image()
 {
     for (int x = 0; x < m_width; ++x)
     {
@@ -52,7 +52,7 @@ void Application::SendFrame2Image()
     }
 }
 
-void Application::Run()
+void Application::run()
 {
     int y = 0;
 
@@ -77,8 +77,12 @@ void Application::Run()
             break;
         }
 
-        UpdateFrameBuffer();
-        SendFrame2Image();
+        // TBD: Draw objects
+        // for(int i = 50; i < 100; i++)
+        //     m_renderer.drawPoint(Vector2d(50, i), Vector3i(0, 255, 0));
+        // m_renderer.drawLine(Vector2d(10, 2), Vector2d(600, 300), Vector3i(255, 0, 255));
+        m_renderer.drawTriangle(Vector2d(10, 210), Vector2d(600, 300), Vector2d(400, 900), Vector3i(25, 25, 255));
+        sendFrame2Image();
         XPutImage(m_window.display, m_window.w, m_window.graphicsContext, m_window.image, 0, 0, 0, 0, m_width, m_height);
         // 等待一段时间
         usleep(delay);
@@ -91,7 +95,7 @@ void Application::Run()
     XCloseDisplay(m_window.display);
 }
 
-void Application::Init()
+void Application::init()
 {
     m_window = window(m_windowName.c_str(), m_width, m_height);
     m_frameBuffer = new int **[m_width];
@@ -113,9 +117,6 @@ void Application::Init()
         for (int j = 0; j < m_height; j++)
             m_depthBuffer[i][j] = 0;
     }
+    m_renderer = Renderer(m_frameBuffer, m_depthBuffer, m_width, m_height);
 }
 
-void Application::UpdateFrameBuffer()
-{
-
-}
