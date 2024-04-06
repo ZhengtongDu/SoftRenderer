@@ -14,7 +14,7 @@ public:
     Matrix3d(const Matrix3d& rhs);
     Matrix3d& operator=(const Matrix3d& rhs);
     ~Matrix3d(){};
-    Matrix3d getIdentity() const;
+    static Matrix3d getIdentity();
     Matrix3d operator-() const;
     Matrix3d operator+(const Matrix3d& rhs) const;
     Matrix3d operator-(const Matrix3d& rhs) const;
@@ -41,7 +41,7 @@ public:
     Matrix4d(const Matrix4d& rhs);
     Matrix4d& operator=(const Matrix4d& rhs);
     ~Matrix4d(){};
-    Matrix4d getIdentity() const;
+    static Matrix4d getIdentity();
     Matrix4d operator-() const;
     Matrix4d operator+(const Matrix4d& rhs) const;
     Matrix4d operator-(const Matrix4d& rhs) const;
@@ -52,6 +52,7 @@ public:
     Vector4d& operator[](const int idx);
     bool operator==(const Matrix4d& rhs) const;
     bool operator!=(const Matrix4d& rhs) const;
+    bool uniform(bool warningOn = true);
     double subDeterminant(const int excludeRow, const int excludeCol) const;
     Matrix4d inverse() const;
     double determinant() const;

@@ -81,7 +81,7 @@ void Application::run()
         // for(int i = 50; i < 100; i++)
         //     m_renderer.drawPoint(Vector2d(50, i), Vector3i(0, 255, 0));
         // m_renderer.drawLine(Vector2d(10, 2), Vector2d(600, 300), Vector3i(255, 0, 255));
-        m_renderer.drawTriangle(Vector2d(10, 210), Vector2d(600, 300), Vector2d(400, 900), Vector3i(25, 25, 255));
+        m_renderer.drawTriangle(Vector2d(10, 210), Vector2d(600, 300), Vector2d(400, 90), Vector3i(25, 25, 255));
         sendFrame2Image();
         XPutImage(m_window.display, m_window.w, m_window.graphicsContext, m_window.image, 0, 0, 0, 0, m_width, m_height);
         // 等待一段时间

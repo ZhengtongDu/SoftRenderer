@@ -6,6 +6,7 @@
 #include <vector>
 
 const double epsilon = 1e-9;
+const double PI = 3.1415926;
 
 class Vector2d;
 class Vector3d;
@@ -124,6 +125,7 @@ public:
     friend Vector4d operator *(const double& lhs, const Vector4d& rhs);
     friend std::ostream &operator<< (std::ostream &output, const Vector4d& rhs);
     double norm() const;
+    bool uniform(bool warningOn = true);
     Vector4d normalize() const;
     Vector4d normalized();
     Vector3d convertToVector3d() const;

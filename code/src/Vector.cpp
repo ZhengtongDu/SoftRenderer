@@ -46,18 +46,18 @@ Vector2d Vector2d::operator/(const double &rhs) const
 
 double Vector2d::operator[](const int idx) const
 {
-    if(idx == 0)
+    if (idx == 0)
         return x;
-    if(idx == 1)
+    if (idx == 1)
         return y;
     throw std::runtime_error("Vector2d index invalid!");
 };
 
-double& Vector2d::operator[](const int idx)
+double &Vector2d::operator[](const int idx)
 {
-    if(idx == 0)
+    if (idx == 0)
         return x;
-    if(idx == 1)
+    if (idx == 1)
         return y;
     throw std::runtime_error("Vector2d index invalid!");
 };
@@ -67,7 +67,7 @@ Vector2d operator*(const double &lhs, const Vector2d &rhs)
     return lhs * rhs;
 };
 
-std::ostream &operator<< (std::ostream &output, const Vector2d& rhs)
+std::ostream &operator<<(std::ostream &output, const Vector2d &rhs)
 {
     output << "(" << rhs.x << ", " << rhs.y << ")";
     return output;
@@ -92,7 +92,7 @@ Vector2d Vector2d::normalized()
     return *this;
 };
 
-double Vector2d::cross(const Vector2d& rhs) const
+double Vector2d::cross(const Vector2d &rhs) const
 {
     return x * rhs.y - y * rhs.x;
 };
@@ -143,22 +143,22 @@ Vector3d Vector3d::operator/(const double &rhs) const
 
 double Vector3d::operator[](const int idx) const
 {
-    if(idx == 0)
+    if (idx == 0)
         return x;
-    if(idx == 1)
+    if (idx == 1)
         return y;
-    if(idx == 2)
+    if (idx == 2)
         return z;
     throw std::runtime_error("Vector3d index invalid!");
 };
 
-double& Vector3d::operator[](const int idx)
+double &Vector3d::operator[](const int idx)
 {
-    if(idx == 0)
+    if (idx == 0)
         return x;
-    if(idx == 1)
+    if (idx == 1)
         return y;
-    if(idx == 2)
+    if (idx == 2)
         return z;
     throw std::runtime_error("Vector3d index invalid!");
 };
@@ -168,7 +168,7 @@ Vector3d operator*(const double &lhs, const Vector3d &rhs)
     return lhs * rhs;
 };
 
-std::ostream &operator<< (std::ostream &output, const Vector3d& rhs)
+std::ostream &operator<<(std::ostream &output, const Vector3d &rhs)
 {
     output << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
     return output;
@@ -241,22 +241,22 @@ Vector3i Vector3i::operator*(const int &rhs) const
 
 int Vector3i::operator[](const int idx) const
 {
-    if(idx == 0)
+    if (idx == 0)
         return x;
-    if(idx == 1)
+    if (idx == 1)
         return y;
-    if(idx == 2)
+    if (idx == 2)
         return z;
     throw std::runtime_error("Vector3i index invalid!");
 };
 
-int& Vector3i::operator[](const int idx)
+int &Vector3i::operator[](const int idx)
 {
-    if(idx == 0)
+    if (idx == 0)
         return x;
-    if(idx == 1)
+    if (idx == 1)
         return y;
-    if(idx == 2)
+    if (idx == 2)
         return z;
     throw std::runtime_error("Vector3i index invalid!");
 };
@@ -266,7 +266,7 @@ Vector3i operator*(const double &lhs, const Vector3i &rhs)
     return lhs * rhs;
 };
 
-std::ostream &operator<< (std::ostream &output, const Vector3i& rhs)
+std::ostream &operator<<(std::ostream &output, const Vector3i &rhs)
 {
     output << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
     return output;
@@ -281,7 +281,7 @@ Vector4d Vector4d::operator-() const
 
 Vector4d Vector4d::operator+(const Vector4d &rhs) const
 {
-    return Vector4d(x + rhs.x, y + rhs.y, z + rhs.z, w + rhs. w);
+    return Vector4d(x + rhs.x, y + rhs.y, z + rhs.z, w + rhs.w);
 };
 
 Vector4d Vector4d::operator-(const Vector4d &rhs) const
@@ -318,35 +318,36 @@ Vector4d Vector4d::operator/(const double &rhs) const
 
 double Vector4d::operator[](const int idx) const
 {
-    if(idx == 0)
+    if (idx == 0)
         return x;
-    if(idx == 1)
+    if (idx == 1)
         return y;
-    if(idx == 2)
+    if (idx == 2)
         return z;
-    if(idx == 3)
+    if (idx == 3)
         return w;
     throw std::runtime_error("Vector4d index invalid!");
 };
 
-double& Vector4d::operator[](const int idx)
+double &Vector4d::operator[](const int idx)
 {
-    if(idx == 0)
+    if (idx == 0)
         return x;
-    if(idx == 1)
+    if (idx == 1)
         return y;
-    if(idx == 2)
+    if (idx == 2)
         return z;
-    if(idx == 3)
+    if (idx == 3)
         return w;
     throw std::runtime_error("Vector4d index invalid!");
 };
 
-Vector4d operator*(const double &lhs, const Vector4d &rhs){
+Vector4d operator*(const double &lhs, const Vector4d &rhs)
+{
     return lhs * rhs;
 };
 
-std::ostream &operator<< (std::ostream &output, const Vector4d& rhs)
+std::ostream &operator<<(std::ostream &output, const Vector4d &rhs)
 {
     output << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ", " << rhs.w << ")";
     return output;
@@ -357,12 +358,23 @@ double Vector4d::norm() const
     return sqrt(x * x + y * y + z * z + w * w);
 };
 
+bool Vector4d::uniform(bool warningOn)
+{
+    if (fabs(w) < epsilon)
+        if (warningOn)
+            throw std::runtime_error("Vector4d::uniform() value invalid!");
+    return false;
+    x /= w, y /= w, z /= w, w = 1.0;
+    return true;
+};
+
 Vector4d Vector4d::normalize() const
 {
     return *this / this->norm();
 };
 
-Vector4d Vector4d::normalized(){
+Vector4d Vector4d::normalized()
+{
     double dis = this->norm();
     if (std::fabs(dis) >= epsilon)
         x = x / dis, y = y / dis, z = z / dis, w = w / dis;
@@ -371,6 +383,7 @@ Vector4d Vector4d::normalized(){
 
 Vector3d Vector4d::convertToVector3d() const
 {
-    if(std::fabs(w) < epsilon) return Vector3d();
+    if (std::fabs(w) < epsilon)
+        return Vector3d();
     return Vector3d(x, y, z) / w;
 };

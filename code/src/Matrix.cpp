@@ -19,7 +19,7 @@ Matrix3d &Matrix3d::operator=(const Matrix3d &rhs)
     return *this;
 };
 
-Matrix3d Matrix3d::getIdentity() const
+Matrix3d Matrix3d::getIdentity()
 {
     Matrix3d ret;
     ret[0][0] = 1;
@@ -161,7 +161,7 @@ Matrix4d &Matrix4d::operator=(const Matrix4d &rhs)
     return *this;
 };
 
-Matrix4d Matrix4d::getIdentity() const
+Matrix4d Matrix4d::getIdentity()
 {
     Matrix4d ret;
     ret[0][0] = 1;
@@ -255,6 +255,18 @@ bool Matrix4d::operator==(const Matrix4d &rhs) const
 bool Matrix4d::operator!=(const Matrix4d &rhs) const
 {
     return !(*this == rhs);
+};
+
+bool Matrix4d::uniform(bool warningOn)
+{
+    if(fabs(data[3][3]) < epsilon)
+        if (warningOn)
+            throw std::runtime_error("Matrix4d::uniform() value invalid!");
+    return false;
+    for(int i = 0; i < 4; i++)
+        data[i] = data[i] / data[3][3];
+    data[3][3] = 1.0;
+    return true;
 };
 
 double Matrix4d::subDeterminant(const int excludeRow, const int excludeCol) const
