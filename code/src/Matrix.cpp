@@ -203,6 +203,11 @@ Matrix4d Matrix4d::operator*(const double &rhs) const
     return ret;
 };
 
+Matrix4d operator*(const double &lhs, const Matrix4d& rhs)
+{
+    return rhs * lhs;
+};
+
 Vector4d Matrix4d::operator*(const Vector4d &rhs) const
 {
     Vector4d ret;

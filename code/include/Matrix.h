@@ -46,6 +46,7 @@ public:
     Matrix4d operator+(const Matrix4d& rhs) const;
     Matrix4d operator-(const Matrix4d& rhs) const;
     Matrix4d operator*(const double& rhs) const;
+    friend Matrix4d operator*(const double& lhs, const Matrix4d& rhs);
     Vector4d operator*(const Vector4d& rhs) const;
     Matrix4d operator*(const Matrix4d& rhs) const;
     Vector4d operator[](const int idx) const;
