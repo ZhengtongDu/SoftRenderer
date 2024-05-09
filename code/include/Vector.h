@@ -57,6 +57,8 @@ public:
     Vector3d operator-() const;
     Vector3d operator +(const Vector3d& rhs) const;
     Vector3d operator -(const Vector3d& rhs) const;
+    Vector3d& operator += (const Vector3d & rhs);
+    Vector3d& operator -= (const Vector3d & rhs);
     bool operator ==(const Vector3d& rhs) const;
     bool operator !=(const Vector3d& rhs) const;
     double operator *(const Vector3d& rhs) const;

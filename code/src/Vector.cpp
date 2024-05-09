@@ -114,6 +114,22 @@ Vector3d Vector3d::operator-(const Vector3d &rhs) const
     return Vector3d(x - rhs.x, y - rhs.y, z - rhs.z);
 };
 
+Vector3d &Vector3d::operator+=(const Vector3d &rhs)
+{
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
+    return *this;
+};
+
+Vector3d &Vector3d::operator-=(const Vector3d &rhs)
+{
+    x -= rhs.x;
+    y -= rhs.y;
+    z -= rhs.z;
+    return *this;
+};
+
 bool Vector3d::operator==(const Vector3d &rhs) const
 {
     return std::fabs(x - rhs.x) < epsilon && std::fabs(y - rhs.y) < epsilon && std::fabs(z - rhs.z) < epsilon;
